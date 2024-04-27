@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Article extends Model
+class News extends Model
 {
     use HasFactory;
 
@@ -13,12 +13,19 @@ class Article extends Model
 
     
     /**
-    * Get the user that owns the Article
+    * Get the user that owns the News
     *
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+
     */
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

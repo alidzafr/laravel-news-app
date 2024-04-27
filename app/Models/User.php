@@ -44,14 +44,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    
-    /**
-     * Get all of the article for the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function article()
-    {
-        return $this->hasMany(Article::class);
+
+    public function news() {
+        return $this->hasMany(News::class)->orderBy('created_at', 'DESC');
     }
 }
