@@ -35,18 +35,29 @@ class NewsController extends Controller
             'picture' => 'nullable',
             'tags' => 'array'
         ]);
+
+        // dd(request('picture')->store('uploads', 'public'));
+
+        // Don't forget to artisan storage:link. otherwise the folder will not accesible
+        // it will create link folder public/storage from storage/app/public
+        $imagePath = request('picture')->store('uploads', 'public');
+
+        Image::configure(['driver' => 'imagick']);
+        $image = image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
+        $image->save();
         
         $news = new News;
         $news->user_id = auth()->user()->id;
         $news->title = $request->input('title');
         $news->content = $request->input('content');
-        $news->picture = $request->input('picture') ?? '';
+        $news->picture = $imagePath;
         $news->save();
         
         $tags = $request->input('tags');
         $news->tags()->attach($tags);
 
         // dd(request()->all());
+        // redirect menuju view dari berita yang baru di upload : redirect('/news/' .$request->id)
         return redirect()->route('article.index');
     }
 }

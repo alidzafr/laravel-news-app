@@ -26,6 +26,7 @@
             @foreach ($news as $item)
             <div class="col-md-4 mb-4">
                 <div class="card" style="width: 20rem;">
+                    <img class="card-img-top" src="/storage/{{ $item->picture }}" alt="Card image cap">
                     <div class="card-body">
                     <h5 class="card-title">{{ str_limit($item->title, 50) }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ $item->user->name}}</h6>
