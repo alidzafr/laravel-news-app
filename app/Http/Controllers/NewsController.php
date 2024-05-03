@@ -43,7 +43,7 @@ class NewsController extends Controller
         $imagePath = request('picture')->store('uploads', 'public');
 
         Image::configure(['driver' => 'imagick']);
-        $image = image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
+        $image = image::make(public_path("storage/{$imagePath}"))->fit(1200, 700);
         $image->save();
         
         $news = new News;
@@ -59,5 +59,10 @@ class NewsController extends Controller
         // dd(request()->all());
         // redirect menuju view dari berita yang baru di upload : redirect('/news/' .$request->id)
         return redirect()->route('article.index');
+    }
+
+    public function show(News $news)
+    {
+        return view('show', compact('news'));
     }
 }
