@@ -7,8 +7,7 @@
         @csrf
         <div class="form-group mb-3">
           <label for="title">Title</label>
-          <input name="title" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter email">
-          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          <input name="title" class="form-control" id="title" placeholder="Enter title">
         </div>
         <div class="form-group mb-3">
             <label for="exampleFormControlTextarea1">Content</label>

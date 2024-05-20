@@ -58,11 +58,48 @@ class NewsController extends Controller
 
         // dd(request()->all());
         // redirect menuju view dari berita yang baru di upload : redirect('/news/' .$request->id)
-        return redirect()->route('article.index');
+        return redirect()->route('news.show', $news->id);
     }
 
     public function show(News $news)
     {
         return view('show', compact('news'));
+    }
+
+    public function edit($id)
+    {
+        $news = News::findorFail($id);
+        $tags = Tag::all();
+        return view('edit', compact('news', 'tags'));
+    }
+
+    public function update(News $news)
+    {
+        $data = request()->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'picture' => '',
+            // 'tags' => 'array'
+        ]);
+
+        // if user inserting new image
+        if(request('picture')) {
+            $imagePath = request('picture')->store('uploads', 'public');
+
+            Image::configure(['driver' => 'imagick']);
+            $picture = image::make(public_path("storage/{$imagePath}"))->fit(1200, 700);
+            $picture->save();
+
+            $imageArr = ['picture' => $imagePath];
+        }
+
+        $news->update(array_merge(
+            $data,
+            $imageArr ?? [] 
+        ));
+        $tags = request()->input('tags');
+        $news->tags()->sync($tags);
+
+        return to_route('news.show', $news->id);
     }
 }

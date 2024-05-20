@@ -16,11 +16,11 @@
             <div class="d-flex">
                 {{-- width 40rem / 54rem --}}
                 <div class="card my-3" style="width: 40rem">
-                    <a href="{{ route('article.show', $news[0]->id) }}">
+                    <a href="{{ route('news.show', $news[0]->id) }}">
                         <img class="card-img-top" src="/storage/{{ $news[0]->picture }}" alt="Card image cap">
                     </a>
                     <div class="card-body">
-                        <a href="{{ route('article.show', $news[0]->id) }}" class="text-reset text-decoration-none">
+                        <a href="{{ route('news.show', $news[0]->id) }}" class="text-reset text-decoration-none">
                             <h5 class="card-title fw-bold">{{ str_limit($news[0]->title, 50) }}</h5>
                         </a>
                         <p class="card-text">{{ $news[0]->content }}</p>
@@ -32,11 +32,11 @@
                     @foreach($news->slice(1,2) as $item)
                         
                     <div class="card ms-3 my-3">
-                        <a href="{{ route('article.show', $item->id) }}">
+                        <a href="{{ route('news.show', $item->id) }}">
                             <img class="card-img-top" src="/storage/{{ $item->picture }}" alt="Card image cap">
                         </a>
                         <div class="card-body">
-                            <a href="{{ route('article.show', $item->id) }}" class="text-reset text-decoration-none">
+                            <a href="{{ route('news.show', $item->id) }}" class="text-reset text-decoration-none">
                                 <h5 class="card-title fw-bold">{{ str_limit($item->title, 50) }}</h5>
                             </a>
                             <p class="card-text">{{ $item->content }}</p>
@@ -53,11 +53,11 @@
             @foreach ($news->slice(3) as $key => $item)
             <div class="col-md-3 mb-3">
                 <div class="card">
-                    <a href="{{ route('article.show', $item->id) }}">
+                    <a href="{{ route('news.show', $item->id) }}">
                         <img class="card-img-top" src="/storage/{{ $item->picture }}" alt="Card image cap">
                     </a>
                     <div class="card-body">
-                        <a href="{{ route('article.show', $item->id) }}" class="text-reset text-decoration-none">
+                        <a href="{{ route('news.show', $item->id) }}" class="text-reset text-decoration-none">
                             <h5 class="card-title fw-bold">{{ str_limit($item->title, 50) }}</h5>
                         </a>
                         <p class="card-text">{{ $item->content }}</p>
