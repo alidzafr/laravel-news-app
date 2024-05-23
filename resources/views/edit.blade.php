@@ -36,6 +36,12 @@
             
         </div>
         <button class="btn btn-primary">Save</button>
+        <a class="btn btn-secondary" href="{{ route('news.show', $news->id) }}" role="button" onclick="return confirm('Are you sure you want to cancel all changes?')">Cancel</a>
+    </form>
+    <form action="{{ route('news.destroy', $news->id) }}" method="POST" style="display:inline;">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this news?')">Delete</button>
     </form>
 </div>
 @endsection

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\News;
 use App\Models\Tag;
+use App\Models\User;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class NewsController extends Controller
@@ -66,20 +67,23 @@ class NewsController extends Controller
         return view('show', compact('news'));
     }
 
-    public function edit($id)
+    public function edit(News $news)
     {
-        $news = News::findorFail($id);
+        $this->authorize('update', $news);
+        // $news = News::findorFail($id);
         $tags = Tag::all();
+        
         return view('edit', compact('news', 'tags'));
     }
-
+    
     public function update(News $news)
     {
+        $this->authorize('update', $news);
+
         $data = request()->validate([
             'title' => 'required',
             'content' => 'required',
             'picture' => '',
-            // 'tags' => 'array'
         ]);
 
         // if user inserting new image
@@ -101,5 +105,16 @@ class NewsController extends Controller
         $news->tags()->sync($tags);
 
         return to_route('news.show', $news->id);
+    }
+
+    public function destroy(News $news)
+    {
+        $this->authorize('delete', $news);
+
+        $news->tags()->detach();
+
+        $news->delete();
+
+        return redirect()->route('news.index');
     }
 }

@@ -24,5 +24,10 @@
         2. style pada content : header2, bold dan huruf miring
         3. lebih dari satu halaman => 1 card untuk 1 halaman
     --}}
+    @can('update', $news)
+    <a href="{{ route('news.edit', $news->id) }}">
+        <button type="button" class="btn btn-outline-dark">Edit</button>
+    </a>
+    @endcan
 </div>
 @endsection
