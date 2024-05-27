@@ -21,5 +21,6 @@ Route::get('/news/{news}/edit', [App\Http\Controllers\NewsController::class, 'ed
 Route::patch('/news/{news}', [App\Http\Controllers\NewsController::class, 'update'])->name('news.update');
 Route::delete('news/{news}', [App\Http\Controllers\NewsController::class, 'destroy'])->name('news.destroy');
 
+Route::get('/category/{tag}', [App\Http\Controllers\NewsController::class, 'category']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

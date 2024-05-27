@@ -8,7 +8,7 @@
             <h5><strong>{{ $news->user->name }}</strong> | {{ $news->created_at }}</h5>
             <div class="d-grid gap-2 d-md-flex py-2">
             @foreach ($news->tags as $tag)
-                <a href="#" class="btn btn-outline-secondary btn-sm" role="button">{{ $tag->name }}</a>
+                <a href="/category/{{ $tag->id }}" class="btn btn-outline-secondary btn-sm" role="button">{{ $tag->name }}</a>
                 {{-- @if (!$loop->last)
                 ,
                 @endif --}}

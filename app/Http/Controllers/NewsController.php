@@ -117,4 +117,12 @@ class NewsController extends Controller
 
         return redirect()->route('news.index');
     }
+
+
+    public function category(Tag $tag)
+    {
+        $news = $tag->news()->get();
+        return view('category', compact('news', 'tag'));
+        // dd($news);
+    }
 }
