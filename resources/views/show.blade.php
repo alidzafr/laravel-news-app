@@ -5,7 +5,8 @@
     <div class="card" style="width: 65rem;">
         <img src="/storage/{{ $news->picture }}" class="w-100">
         <div class="card-body">
-            <h5><strong>{{ $news->user->name }}</strong> | {{ $news->created_at }}</h5>
+            <a href="http://"></a>
+            <h5><a href="/author/{{ $news->user_id }}">{{ $news->user->name }}</a> | {{ $news->created_at }}</h5>
             <div class="d-grid gap-2 d-md-flex py-2">
             @foreach ($news->tags as $tag)
                 <a href="/category/{{ $tag->id }}" class="btn btn-outline-secondary btn-sm" role="button">{{ $tag->name }}</a>
@@ -15,7 +16,7 @@
             @endforeach
             </div>
             <h1 class="pt-2 card-title">{{ $news->title }}</h1>
-            <p class="card-text">{{ $news->content }}</p>
+            <p class="card-text">{!! $news->content !!}</p>
         </div>
     </div>                
             

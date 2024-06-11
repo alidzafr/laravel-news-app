@@ -10,8 +10,10 @@
           <input name="title" class="form-control" id="title" placeholder="Enter title">
         </div>
         <div class="form-group mb-3">
-            <label for="exampleFormControlTextarea1">Content</label>
-            <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+            <label for="content">Content</label>
+            <input id="content" type="hidden" name="content">
+            <trix-editor input="content"></trix-editor>
+            {{-- <textarea name="content" class="form-control" id="content" rows="5"></textarea> --}}
         </div>
         <div class="form-group mb-3">
             <div><label for="exampleFormControlFile1">News Header</label></div>
@@ -29,4 +31,10 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+
+<script>
+    document.addEventListener('trix-file-accept', function(e) {
+        e.preventDefault();
+    })
+</script>
 @endsection

@@ -14,7 +14,7 @@ class NewsController extends Controller
     
     public function index() 
     {
-        $news = News::with(['tags', 'user'])->get();
+        $news = News::with(['tags', 'user'])->paginate(20);
         
         return view('index', compact('news'));
     }
@@ -41,7 +41,7 @@ class NewsController extends Controller
 
         // Don't forget to artisan storage:link. otherwise the folder will not accesible
         // it will create link folder public/storage from storage/app/public
-        $imagePath = request('picture')->store('uploads', 'public');
+        $imagePath = request('picture') ? request('picture')->store('uploads', 'public') : '-';
 
         Image::configure(['driver' => 'imagick']);
         $image = image::make(public_path("storage/{$imagePath}"))->fit(1200, 700);
@@ -118,11 +118,25 @@ class NewsController extends Controller
         return redirect()->route('news.index');
     }
 
+    public function indexCategory()
+    {
+        $tag = Tag::all()->first();
+        return to_route('news.category', $tag->id);
+    }
 
     public function category(Tag $tag)
     {
         $news = $tag->news()->get();
-        return view('category', compact('news', 'tag'));
+        $allTags = Tag::all();
+        return view('category', compact('news', 'tag', 'allTags'));
         // dd($news);
     }
+
+    public function author(User $user)
+    {
+        $news = $user->news()->get();
+        return view('author', compact('news'));
+        // dd($news);
+    }
+
 }

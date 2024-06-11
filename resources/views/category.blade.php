@@ -11,8 +11,15 @@
 
     @section('content')
     <div class="container">
+        <h2>{{ $tag->name }}</h2>
+        <ul class="nav nav-tabs mt-4 mb-2">
+            @foreach ($allTags as $tags)
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('category/' . $tags->id) ? 'active fw-bold " aria-current="page' : 'text-reset' }}" href="/category/{{$tags->id}}">{{ $tags->name }}</a>
+            </li>
+            @endforeach
+        </ul>
         <div class="row">
-            <h5>Kategori: {{ $tag->name }}</h5>
             @if($news->isNotEmpty())
             <div class="d-flex">
                 {{-- width 40rem / 54rem --}}
