@@ -14,8 +14,8 @@
         <div class="form-group mb-3">
             <label for="exampleFormControlTextarea1">Content</label>
             {{-- <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="5">{{ $news->content }}</textarea> --}}
-            <input id="content" type="hidden" name="content">
-            <trix-editor input="content">Lorem, ipsum.</trix-editor>
+            <input id="content" type="hidden" name="content" value="{{ old('content', $news->content) }}">
+            <trix-editor input="content"></trix-editor>
         </div>
         <div class="form-group mb-3">
             <div><label for="exampleFormControlFile1">News Header</label></div>

@@ -7,7 +7,9 @@
             @foreach ($news as $item)
             <div class="col">
                 <div class="card h-100">
-                    <img src="/storage/{{ $item->picture }}" class="card-img-top" alt="...">
+                    <a href="{{ route('news.show', $item->id) }}" class="stretched-link">
+                        <img src="/storage/{{ $item->picture }}" class="card-img-top" alt="...">
+                    </a>
                     <div class="card-body">
                         <h5 class="card-title">{{ $item->title }}</h5>
                         <p class="card-text">{{ \Illuminate\Support\Str::words(strip_tags($news[0]->content), 150) }}</p>
